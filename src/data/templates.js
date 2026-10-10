@@ -161,10 +161,11 @@ export const TEMPLATES = [
     event: 'infantil',
     name: 'Globos de Colores',
     theme: {
-      bg: '#f0f8ff', surface: '#ffffff', text: '#24324a', muted: '#6b7a93',
+      bg: '#f2fbea', surface: '#ffffff', text: '#24324a', muted: '#5b6b80',
       accent: '#3a86ff', accent2: '#ffd166', onAccent: '#ffffff',
       display: round, heading: round, body: round,
-      ornament: '🎈', pattern: 'radial-gradient(circle at 10% 10%, #ffe9a8 0, transparent 30%), radial-gradient(circle at 90% 30%, #ffc8dd 0, transparent 30%), radial-gradient(circle at 20% 90%, #bde0fe 0, transparent 30%)',
+      ornament: '🎈', scene: 'farm',
+      pattern: 'linear-gradient(180deg, #e3f4ff 0%, #f2fbea 35%, #e4f5d4 100%)',
     },
     defaults: {
       eyebrow: '¡Estás invitado!', names: 'Santi cumple 5',

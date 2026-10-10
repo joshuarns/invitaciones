@@ -75,7 +75,8 @@ img { max-width: 100%; }
   min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding: 48px 24px;
 }
-.phone-screen .inv-hero { min-height: 640px; }
+.phone-screen { container-type: size; }
+.phone-screen .inv-hero { min-height: 100cqh; }
 .inv-ornament { font-size: 44px; color: var(--accent); animation: float 4s ease-in-out infinite; }
 .inv-ornament.small { font-size: 28px; }
 .inv-eyebrow {
@@ -137,7 +138,7 @@ img { max-width: 100%; }
 .view-inner { opacity: 0; transition: opacity .8s; }
 .view-inner.is-open { opacity: 1; }
 .envelope {
-  position: fixed; inset: 0; z-index: 10; border: 0; width: 100%;
+  position: fixed; inset: 0; z-index: 10; border: 0; width: 100%; height: 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px;
 }
 .envelope-cta {
@@ -212,4 +213,30 @@ img { max-width: 100%; }
   .phone { height: 70vh; flex: none; width: 100%; max-width: 360px; }
   .ed-share { width: 100%; max-width: 360px; }
   .ed-bar strong { display: none; }
+}
+
+/* ---------- Escenas ilustradas ---------- */
+.has-scene {
+  --ground: clamp(190px, 38vh, 340px);
+  overflow: hidden; isolation: isolate;
+  background: linear-gradient(180deg, #8fd3ff 0%, #d6f0ff 55%, #f4fbff 100%);
+}
+.has-scene:not(.envelope) { position: relative; }
+.phone-screen .has-scene { --ground: clamp(170px, 40cqh, 300px); }
+.tpl-cover.has-scene { --ground: 42%; justify-content: flex-start; padding-top: 14%; }
+.has-scene > :not(.farm) { position: relative; z-index: 1; }
+.has-scene.inv-hero, .has-scene.envelope { justify-content: center; padding-bottom: calc(var(--ground) + 8px); }
+.has-scene .inv-names { text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255,255,255,.9); }
+.has-scene .inv-eyebrow, .has-scene .inv-date { text-shadow: 0 0 10px rgba(255,255,255,.9); }
+.has-scene.envelope .envelope-cta { background: rgba(255,255,255,.75); }
+.farm { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.farm-sky { position: absolute; top: 0; left: 0; width: 100%; height: 34%; }
+.farm-ground { position: absolute; bottom: 0; left: 0; width: 100%; height: var(--ground); }
+.farm-animal { animation: hop 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
+.farm-cloud { animation: drift 18s ease-in-out infinite alternate; }
+.farm-cloud.slow { animation-duration: 26s; }
+@keyframes hop { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-6px); } }
+@keyframes drift { to { transform: translateX(40px); } }
+@media (prefers-reduced-motion: reduce) {
+  .farm-animal, .farm-cloud, .inv-ornament { animation: none; }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { EVENTS, TEMPLATES } from '../data/templates.js'
-import { themeVars } from '../components/Invitation.jsx'
+import { SCENES, themeVars } from '../components/Invitation.jsx'
 
 const FEATURES = [
   ['✅', 'Confirmación por WhatsApp', 'Tus invitados confirman con un toque y te llega el mensaje listo.'],
@@ -46,9 +46,12 @@ export default function Gallery() {
           ))}
         </div>
         <div className="site-grid">
-          {list.map((t) => (
+          {list.map((t) => {
+            const Scene = SCENES[t.theme.scene]
+            return (
             <Link key={t.id} to={`/editar/${t.id}`} className="tpl-card">
-              <div className="tpl-cover inv" style={themeVars(t.theme)}>
+              <div className={`tpl-cover inv${Scene ? ' has-scene' : ''}`} style={themeVars(t.theme)}>
+                {Scene && <Scene />}
                 <div className="inv-ornament">{t.theme.ornament}</div>
                 <p className="inv-eyebrow">{t.defaults.eyebrow}</p>
                 <p className="inv-names">{t.defaults.names}</p>
@@ -58,7 +61,8 @@ export default function Gallery() {
                 <span>{EVENTS.find((e) => e.id === t.event)?.label}</span>
               </div>
             </Link>
-          ))}
+            )
+          })}
         </div>
       </section>
 

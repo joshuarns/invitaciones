@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import Invitation, { themeVars } from '../components/Invitation.jsx'
+import Invitation, { SCENES, themeVars } from '../components/Invitation.jsx'
 import { getTemplate } from '../data/templates.js'
 import { decodeInvitation } from '../lib/share.js'
 
@@ -26,6 +26,7 @@ export default function View() {
   }
 
   const { theme } = getTemplate(inv.t)
+  const Scene = SCENES[theme.scene]
 
   function open() {
     setOpened(true)
@@ -43,7 +44,8 @@ export default function View() {
       {inv.music && <audio ref={audio} src={inv.music} loop preload="auto" />}
 
       {!opened && (
-        <button className="envelope inv" style={themeVars(theme)} onClick={open}>
+        <button className={`envelope inv${Scene ? ' has-scene' : ''}`} style={themeVars(theme)} onClick={open}>
+          {Scene && <Scene />}
           <div className="inv-ornament">{theme.ornament}</div>
           <p className="inv-eyebrow">{inv.eyebrow}</p>
           <p className="inv-names">{inv.names}</p>

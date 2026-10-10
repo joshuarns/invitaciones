@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getTemplate } from '../data/templates.js'
+import FarmScene from './FarmScene.jsx'
 import { downloadIcs, eventDate, formatLongDate, formatShortDate, formatTime, googleCalendarUrl } from '../lib/dates.js'
+
+export const SCENES = { farm: FarmScene }
 
 export function themeVars(theme) {
   return {
@@ -85,10 +88,12 @@ export default function Invitation({ inv }) {
   const date = eventDate(inv)
   const place = inv.mapQuery || [inv.venue, inv.address].filter(Boolean).join(', ')
   const show = inv.show ?? {}
+  const Scene = SCENES[theme.scene]
 
   return (
     <article className="inv" style={themeVars(theme)}>
-      <header className="inv-hero">
+      <header className={`inv-hero${Scene ? ' has-scene' : ''}`}>
+        {Scene && <Scene />}
         <div className="inv-ornament">{theme.ornament}</div>
         <p className="inv-eyebrow">{inv.eyebrow}</p>
         <h1 className="inv-names">{inv.names}</h1>
