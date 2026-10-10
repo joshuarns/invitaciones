@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getTemplate } from '../data/templates.js'
 import FarmScene from './FarmScene.jsx'
+import Confetti from './Confetti.jsx'
 import { downloadIcs, eventDate, formatLongDate, formatShortDate, formatTime, googleCalendarUrl } from '../lib/dates.js'
 
 export const SCENES = { farm: FarmScene }
@@ -51,10 +52,12 @@ function Rsvp({ inv }) {
   const [name, setName] = useState('')
   const [guests, setGuests] = useState(1)
   const [attending, setAttending] = useState(true)
+  const [confetti, setConfetti] = useState(0)
   const phone = (inv.rsvpPhone || '').replace(/\D/g, '')
 
   function submit(e) {
     e.preventDefault()
+    if (attending) setConfetti((c) => c + 1)
     const text = attending
       ? `¡Hola! Soy ${name.trim()} y confirmo mi asistencia a "${inv.eyebrow} · ${inv.names}". Asistiremos ${guests} persona${guests > 1 ? 's' : ''}. 🎉`
       : `¡Hola! Soy ${name.trim()}. Lamentablemente no podré asistir a "${inv.eyebrow} · ${inv.names}". ¡Muchas felicidades!`
@@ -63,6 +66,7 @@ function Rsvp({ inv }) {
 
   return (
     <form className="inv-rsvp" onSubmit={submit}>
+      <Confetti burst={confetti} />
       <input required placeholder="Tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
       <div className="inv-toggle">
         <button type="button" className={attending ? 'on' : ''} onClick={() => setAttending(true)}>Sí asistiré</button>
@@ -93,7 +97,7 @@ export default function Invitation({ inv }) {
   return (
     <article className="inv" style={themeVars(theme)}>
       <header className={`inv-hero${Scene ? ' has-scene' : ''}`}>
-        {Scene && <Scene />}
+        {Scene && <Scene interactive />}
         <div className="inv-ornament">{theme.ornament}</div>
         <p className="inv-eyebrow">{inv.eyebrow}</p>
         <h1 className="inv-names">{inv.names}</h1>
