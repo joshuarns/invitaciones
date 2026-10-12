@@ -230,9 +230,11 @@ img { max-width: 100%; }
 .has-scene .inv-names { text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255,255,255,.9); }
 .has-scene .inv-eyebrow, .has-scene .inv-date { text-shadow: 0 0 10px rgba(255,255,255,.9); }
 .has-scene.envelope .envelope-cta { background: rgba(255,255,255,.75); }
-.farm { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.farm-sky { position: absolute; top: 0; left: 0; width: 100%; height: 34%; }
-.farm-ground { position: absolute; bottom: -1px; left: 0; width: 100%; height: calc(var(--ground) + 1px); }
+/* .farm sin z-index: así sus capas se ordenan junto al texto de la portada
+   (cielo y suelo detrás, globos por delante del nombre). */
+.farm { position: absolute; inset: 0; pointer-events: none; }
+.farm-sky { position: absolute; top: 0; left: 0; width: 100%; height: 34%; z-index: 0; }
+.farm-ground { position: absolute; bottom: -1px; left: 0; width: 100%; height: calc(var(--ground) + 1px); z-index: 0; }
 .farm-animal { animation: hop 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
 .farm-cloud { animation: drift 18s ease-in-out infinite alternate; }
 .farm-cloud.slow { animation-duration: 26s; }
@@ -263,7 +265,7 @@ img { max-width: 100%; }
 .farm-surprise { transform-box: fill-box; transform-origin: bottom center; transition: transform .6s cubic-bezier(.3, 1.6, .5, 1) .15s; transform: translateY(0) scale(.6); }
 .farm-surprise.up { transform: translateY(-14px) scale(1.15); }
 
-.farm-balloons { position: absolute; inset: 0; overflow: hidden; }
+.farm-balloons { position: absolute; inset: 0; overflow: hidden; z-index: 2; }
 .farm-balloon {
   position: absolute; bottom: 0; width: 34px; height: 42px; margin-left: -17px; padding: 0; border: 0;
   border-radius: 50% 50% 48% 52% / 58% 58% 42% 42%; pointer-events: auto;
