@@ -321,3 +321,30 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .farm-balloon { animation-duration: 40s !important; }
 }
+
+/* ---------- Escena fija detrás de toda la invitación ----------
+   La capa es sticky (no fixed) para que funcione igual en la ventana y dentro del
+   teléfono del editor, que tiene su propio scroll. El margen negativo hace que no ocupe espacio. */
+.inv.with-scene { --ground: clamp(190px, 38vh, 340px); position: relative; isolation: isolate; padding-bottom: var(--ground); }
+.phone-screen .inv.with-scene { --ground: clamp(170px, 40cqh, 300px); }
+.scene-fixed {
+  position: sticky; top: 0; z-index: 0; overflow: hidden;
+  height: 100vh; margin-bottom: -100vh;
+  height: 100svh; margin-bottom: -100svh;
+  background: linear-gradient(180deg, #8fd3ff 0%, #d6f0ff 55%, #f4fbff 100%);
+}
+.phone-screen .scene-fixed { height: 100cqh; margin-bottom: -100cqh; }
+.inv.with-scene > :not(.scene-fixed) { position: relative; z-index: 1; }
+
+.inv-hero.over-scene { justify-content: center; padding-bottom: calc(var(--ground) + 8px); pointer-events: none; }
+.inv-hero.over-scene > * { pointer-events: auto; }
+.over-scene .inv-names { text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255,255,255,.9); }
+.over-scene .inv-eyebrow, .over-scene .inv-date { text-shadow: 0 0 10px rgba(255,255,255,.9); }
+
+.inv.with-scene .inv-section,
+.inv.with-scene .inv-footer {
+  background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border-radius: 24px; margin: 16px auto; width: calc(100% - 32px); max-width: 520px;
+  box-shadow: 0 8px 30px rgba(36,50,74,.1);
+}
+.inv.with-scene .inv-footer { padding: 28px 24px; }
