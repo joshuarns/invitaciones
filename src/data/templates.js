@@ -161,11 +161,12 @@ export const TEMPLATES = [
     event: 'infantil',
     name: 'Globos de Colores',
     theme: {
-      bg: '#f2fbea', surface: '#ffffff', text: '#24324a', muted: '#5b6b80',
+      bg: '#69b84c', surface: '#ffffff', text: '#24324a', muted: '#5b6b80',
       accent: '#3a86ff', accent2: '#ffd166', onAccent: '#ffffff',
       display: round, heading: round, body: round,
-      ornament: '🎈', scene: 'farm',
-      pattern: 'linear-gradient(180deg, #e3f4ff 0%, #f2fbea 35%, #e4f5d4 100%)',
+      // títulos fuera de las tarjetas: el azul no contrasta sobre el verde
+      headingOnBg: '#24324a', field: '#f4f8ff',
+      ornament: '🎈', scene: 'farm', pattern: 'none',
     },
     defaults: {
       eyebrow: '¡Estás invitado!', names: 'Santi cumple 5',

@@ -96,6 +96,7 @@ img { max-width: 100%; }
 .inv-section h2 {
   font-family: var(--f-heading); font-weight: 600; font-size: 24px; margin: 0 0 16px; color: var(--accent);
 }
+.inv-section:not(.inv-card) h2 { color: var(--heading-on-bg); }
 .inv-card {
   background: var(--surface); border-radius: 24px; margin: 16px auto; width: calc(100% - 32px);
   box-shadow: 0 8px 30px rgba(0,0,0,.06); border: 1px solid var(--accent2);
@@ -116,12 +117,12 @@ img { max-width: 100%; }
   background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600; font-family: inherit;
 }
 .inv-btn:disabled { opacity: .45; cursor: not-allowed; }
-.inv-btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.inv-btn.ghost { background: var(--surface); color: var(--accent); border: 1.5px solid var(--accent); }
 .inv-row { display: flex; gap: 10px; }
 .inv-rsvp { display: grid; gap: 12px; text-align: left; margin-top: 12px; }
 .inv-rsvp input, .inv-rsvp select {
   width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid var(--accent2);
-  background: var(--bg); color: var(--text); font: inherit;
+  background: var(--field); color: var(--text); font: inherit;
 }
 .inv-guests { display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
 .inv-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -231,7 +232,7 @@ img { max-width: 100%; }
 .has-scene.envelope .envelope-cta { background: rgba(255,255,255,.75); }
 .farm { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .farm-sky { position: absolute; top: 0; left: 0; width: 100%; height: 34%; }
-.farm-ground { position: absolute; bottom: 0; left: 0; width: 100%; height: var(--ground); }
+.farm-ground { position: absolute; bottom: -1px; left: 0; width: 100%; height: calc(var(--ground) + 1px); }
 .farm-animal { animation: hop 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
 .farm-cloud { animation: drift 18s ease-in-out infinite alternate; }
 .farm-cloud.slow { animation-duration: 26s; }
@@ -321,30 +322,3 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .farm-balloon { animation-duration: 40s !important; }
 }
-
-/* ---------- Escena fija detrás de toda la invitación ----------
-   La capa es sticky (no fixed) para que funcione igual en la ventana y dentro del
-   teléfono del editor, que tiene su propio scroll. El margen negativo hace que no ocupe espacio. */
-.inv.with-scene { --ground: clamp(190px, 38vh, 340px); position: relative; isolation: isolate; padding-bottom: var(--ground); }
-.phone-screen .inv.with-scene { --ground: clamp(170px, 40cqh, 300px); }
-.scene-fixed {
-  position: sticky; top: 0; z-index: 0; overflow: hidden;
-  height: 100vh; margin-bottom: -100vh;
-  height: 100svh; margin-bottom: -100svh;
-  background: linear-gradient(180deg, #8fd3ff 0%, #d6f0ff 55%, #f4fbff 100%);
-}
-.phone-screen .scene-fixed { height: 100cqh; margin-bottom: -100cqh; }
-.inv.with-scene > :not(.scene-fixed) { position: relative; z-index: 1; }
-
-.inv-hero.over-scene { justify-content: center; padding-bottom: calc(var(--ground) + 8px); pointer-events: none; }
-.inv-hero.over-scene > * { pointer-events: auto; }
-.over-scene .inv-names { text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255,255,255,.9); }
-.over-scene .inv-eyebrow, .over-scene .inv-date { text-shadow: 0 0 10px rgba(255,255,255,.9); }
-
-.inv.with-scene .inv-section,
-.inv.with-scene .inv-footer {
-  background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  border-radius: 24px; margin: 16px auto; width: calc(100% - 32px); max-width: 520px;
-  box-shadow: 0 8px 30px rgba(36,50,74,.1);
-}
-.inv.with-scene .inv-footer { padding: 28px 24px; }

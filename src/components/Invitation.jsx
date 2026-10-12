@@ -19,6 +19,8 @@ export function themeVars(theme) {
     '--f-heading': theme.heading,
     '--f-body': theme.body,
     '--pattern': theme.pattern,
+    '--field': theme.field ?? theme.bg,
+    '--heading-on-bg': theme.headingOnBg ?? theme.accent,
   }
 }
 
@@ -95,13 +97,9 @@ export default function Invitation({ inv }) {
   const Scene = SCENES[theme.scene]
 
   return (
-    <article className={`inv${Scene ? ' with-scene' : ''}`} style={themeVars(theme)}>
-      {Scene && (
-        <div className="scene-fixed">
-          <Scene interactive />
-        </div>
-      )}
-      <header className={`inv-hero${Scene ? ' over-scene' : ''}`}>
+    <article className="inv" style={themeVars(theme)}>
+      <header className={`inv-hero${Scene ? ' has-scene' : ''}`}>
+        {Scene && <Scene interactive />}
         <div className="inv-ornament">{theme.ornament}</div>
         <p className="inv-eyebrow">{inv.eyebrow}</p>
         <h1 className="inv-names">{inv.names}</h1>
