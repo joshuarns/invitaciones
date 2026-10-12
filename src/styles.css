@@ -218,52 +218,126 @@ img { max-width: 100%; }
 
 /* ---------- Escenas ilustradas ---------- */
 .has-scene {
-  --ground: clamp(190px, 38vh, 340px);
+  --ground: clamp(200px, 40vh, 360px);
   overflow: hidden; isolation: isolate;
-  background: linear-gradient(180deg, #8fd3ff 0%, #d6f0ff 55%, #f4fbff 100%);
+  background: linear-gradient(180deg, #2ea5f3 0%, #6cc6fb 42%, #c9ecff 78%, #e8f7ff 100%);
 }
 .has-scene:not(.envelope) { position: relative; }
-.phone-screen .has-scene { --ground: clamp(170px, 40cqh, 300px); }
-.tpl-cover.has-scene { --ground: 42%; justify-content: flex-start; padding-top: 14%; }
+.phone-screen .has-scene { --ground: clamp(180px, 42cqh, 320px); }
+.tpl-cover.has-scene { container-type: size; --ground: 44cqh; justify-content: flex-start; padding-top: 10%; }
 .has-scene > :not(.farm) { position: relative; z-index: 1; }
-.has-scene.inv-hero, .has-scene.envelope { justify-content: center; padding-bottom: calc(var(--ground) + 8px); }
-.has-scene .inv-names { text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255,255,255,.9); }
-.has-scene .inv-eyebrow, .has-scene .inv-date { text-shadow: 0 0 10px rgba(255,255,255,.9); }
-.has-scene.envelope .envelope-cta { background: rgba(255,255,255,.75); }
-/* .farm sin z-index: así sus capas se ordenan junto al texto de la portada
-   (cielo y suelo detrás, globos por delante del nombre). */
+.has-scene.inv-hero, .has-scene.envelope { justify-content: center; padding-bottom: calc(var(--ground) * .85); }
+
+/* Tipografía de la granja: etiqueta azul, nombre grueso con borde blanco sobre una nube */
+.scene-farm .inv-ornament { font-size: 52px; }
+.scene-farm .inv-eyebrow {
+  display: inline-block; margin: 12px 0 10px; padding: 7px 18px; border-radius: 999px;
+  background: #1f6fe0; color: #fff; border: 2px solid #fff; font-weight: 600; font-size: 14px; letter-spacing: .06em;
+  box-shadow: 0 4px 0 rgba(15, 60, 140, .25);
+}
+.scene-farm .inv-eyebrow::before, .scene-farm .inv-eyebrow::after {
+  content: ''; position: absolute; top: 50%; width: 22px; height: 22px; margin-top: -11px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f6fe0' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M4 4l5 4M2 12h7M4 20l5-4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.scene-farm .inv-eyebrow::before { right: calc(100% + 6px); }
+.scene-farm .inv-eyebrow::after { left: calc(100% + 6px); transform: scaleX(-1); }
+.scene-farm .inv-names {
+  font-weight: 700; color: #1650cf; line-height: 1.05; padding: .3em .35em; margin: 0;
+  font-size: clamp(46px, 13.5vw, 84px);
+  text-shadow: 4px 0 #fff, -4px 0 #fff, 0 4px #fff, 0 -4px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff,
+    0 8px 0 rgba(20, 70, 160, .22);
+}
+.scene-farm .inv-names::before {
+  content: ''; position: absolute; inset: -6% -8%; z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 170' preserveAspectRatio='none'%3E%3Cg fill='%23cfe8fc' opacity='.9'%3E%3Ccircle cx='60' cy='100' r='50'/%3E%3Ccircle cx='120' cy='62' r='54'/%3E%3Ccircle cx='190' cy='60' r='52'/%3E%3Ccircle cx='245' cy='100' r='50'/%3E%3Crect x='30' y='90' width='240' height='72' rx='36'/%3E%3C/g%3E%3Cg fill='%23fff' opacity='.92'%3E%3Ccircle cx='60' cy='94' r='48'/%3E%3Ccircle cx='120' cy='56' r='52'/%3E%3Ccircle cx='190' cy='54' r='50'/%3E%3Ccircle cx='245' cy='94' r='48'/%3E%3Crect x='30' y='84' width='240' height='70' rx='35'/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.scene-farm .inv-date {
+  font-weight: 600; color: #1a3d7c; background: rgba(255, 255, 255, .85); padding: 6px 16px;
+  border-radius: 999px; letter-spacing: .15em; font-size: 17px; margin-top: 10px;
+}
+.phone-screen .scene-farm .inv-names { font-size: 46px; }
+.tpl-cover.scene-farm .inv-ornament { font-size: 30px; }
+.tpl-cover.scene-farm .inv-eyebrow { font-size: 10px; padding: 4px 10px; margin: 6px 0; }
+.tpl-cover.scene-farm .inv-eyebrow::before, .tpl-cover.scene-farm .inv-eyebrow::after { display: none; }
+.tpl-cover.scene-farm .inv-names { font-size: 28px; text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 0 4px 0 rgba(20, 70, 160, .2); }
+.scene-farm.envelope .envelope-cta {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 14px 30px;
+  background: #1f6fe0; color: #fff; border: 3px solid #fff; font-weight: 600; font-size: 17px; letter-spacing: .05em;
+  box-shadow: 0 5px 0 #1550b0, 0 12px 24px rgba(20, 70, 160, .3);
+}
+.scene-farm.envelope .envelope-cta::before {
+  content: ''; width: 26px; height: 26px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 12V6a1.5 1.5 0 0 1 3 0v5'/%3E%3Cpath d='M13 10.5a1.5 1.5 0 0 1 3 0V12'/%3E%3Cpath d='M16 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.7-2.3L5 15.6a1.5 1.5 0 0 1 2.4-1.8L10 16'/%3E%3Cpath d='M6.5 4.5 5 3M5 8H3M11.5 2V.5M16 4l1.5-1.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Capas de la granja. .farm no lleva z-index: así sus capas se ordenan junto al texto
+   de la portada (cielo y suelo detrás, globos por delante del nombre). */
 .farm { position: absolute; inset: 0; pointer-events: none; }
-.farm-sky { position: absolute; top: 0; left: 0; width: 100%; height: 34%; z-index: 0; }
-.farm-ground { position: absolute; bottom: -1px; left: 0; width: 100%; height: calc(var(--ground) + 1px); z-index: 0; }
-.farm-animal { animation: hop 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
-.farm-cloud { animation: drift 18s ease-in-out infinite alternate; }
+.farm-sky { position: absolute; top: 0; left: 0; right: 0; height: calc(100% - var(--ground) * .5); z-index: 0; }
+.farm-cloud {
+  position: absolute; height: auto; filter: drop-shadow(0 4px 6px rgba(30, 100, 170, .12));
+  animation: drift 18s ease-in-out infinite alternate;
+}
 .farm-cloud.slow { animation-duration: 26s; }
+.farm-sun {
+  position: absolute; top: -4%; right: -8%; width: clamp(100px, 32%, 200px);
+  display: block; padding: 0; border: 0; background: none;
+}
+.farm-sun-body { display: block; }
+.farm-sun-body svg { display: block; width: 100%; height: auto; }
+.farm-sun-body.spin { animation: sun-spin .9s ease-out; }
+@keyframes sun-spin { from { transform: rotate(-360deg) scale(.6); } }
+.farm-rays { transform-box: fill-box; transform-origin: center; animation: rays 40s linear infinite; }
+@keyframes rays { to { transform: rotate(360deg); } }
+.farm-ground { position: absolute; left: 0; right: 0; bottom: -1px; height: calc(var(--ground) + 1px); z-index: 0; }
+.farm-hills { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.farm-stage {
+  position: absolute; bottom: 0; left: 50%; height: 100%; transform: translateX(-50%);
+  width: min(100%, calc(var(--ground) * 1.35));
+}
+.farm-prop, .farm-animal { position: absolute; display: block; padding: 0; border: 0; background: none; }
+.farm-prop > svg { display: block; width: 100%; height: auto; }
+.farm-fence svg { height: calc(var(--ground) * .14); }
+.farm-animal { transform: translateX(-50%); }
+.farm-animal:has(.farm-bubble) { z-index: 2; }
+.farm-animal img {
+  display: block; width: 100%; height: auto; user-select: none;
+  filter: drop-shadow(0 4px 3px rgba(0, 60, 0, .25));
+  animation: hop 2.4s ease-in-out infinite; transform-origin: bottom center;
+}
 @keyframes hop { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-6px); } }
 @keyframes drift { to { transform: translateX(40px); } }
-@media (prefers-reduced-motion: reduce) {
-  .farm-animal, .farm-cloud, .inv-ornament { animation: none; }
-}
 
 /* ---------- Granja interactiva ---------- */
 .farm.is-interactive .farm-tap { pointer-events: auto; cursor: pointer; }
 .farm-tap { -webkit-tap-highlight-color: transparent; }
-.farm-animal.jump { animation: jump .6s cubic-bezier(.3, 1.6, .5, 1); }
+.farm-tap:focus-visible { outline: 3px solid #fff; outline-offset: 2px; border-radius: 14px; }
+.farm-animal img.jump { animation: jump .6s cubic-bezier(.3, 1.6, .5, 1); }
 @keyframes jump {
   0% { transform: translateY(0) scale(1, 1); }
   20% { transform: translateY(0) scale(1.15, .85); }
   50% { transform: translateY(-22px) scale(.95, 1.1); }
   100% { transform: translateY(0) scale(1, 1); }
 }
-.farm-bubble { animation: bubble .25s cubic-bezier(.3, 1.6, .5, 1); transform-box: fill-box; transform-origin: bottom center; }
-@keyframes bubble { from { transform: scale(0); opacity: 0; } }
-.farm-sun { transform-box: fill-box; transform-origin: center; }
-.farm-sun.spin { animation: sun-spin .9s ease-out; }
-@keyframes sun-spin { from { transform: rotate(-360deg) scale(.6); } }
+.farm-bubble {
+  position: absolute; left: 50%; bottom: 92%; transform: translateX(-50%); white-space: nowrap;
+  background: #fff; color: #24324a; border: 2px solid #24324a; border-radius: 999px; padding: 3px 10px;
+  font: 600 14px/1.2 var(--f-body); animation: bubble .25s cubic-bezier(.3, 1.6, .5, 1);
+}
+.farm-bubble::after {
+  content: ''; position: absolute; left: 50%; top: 100%; margin-left: -6px;
+  border: 6px solid transparent; border-top-color: #24324a;
+}
+@keyframes bubble { from { transform: translateX(-50%) scale(0); opacity: 0; } }
 .farm-door { transform-box: fill-box; transform-origin: left center; transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
 .farm-door.right { transform-origin: right center; }
 .farm-door.open { transform: scaleX(.12); }
 .farm-surprise { transform-box: fill-box; transform-origin: bottom center; transition: transform .6s cubic-bezier(.3, 1.6, .5, 1) .15s; transform: translateY(0) scale(.6); }
 .farm-surprise.up { transform: translateY(-14px) scale(1.15); }
+
+@media (prefers-reduced-motion: reduce) {
+  .farm-animal img, .farm-cloud, .farm-rays, .inv-ornament { animation: none; }
+}
 
 .farm-balloons { position: absolute; inset: 0; overflow: hidden; z-index: 2; }
 .farm-balloon {

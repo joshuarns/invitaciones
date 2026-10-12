@@ -44,7 +44,7 @@ export default function View() {
       {inv.music && <audio ref={audio} src={inv.music} loop preload="auto" />}
 
       {!opened && (
-        <button className={`envelope inv${Scene ? ' has-scene' : ''}`} style={themeVars(theme)} onClick={open}>
+        <button className={`envelope inv${Scene ? ` has-scene scene-${theme.scene}` : ''}`} style={themeVars(theme)} onClick={open}>
           {Scene && <Scene />}
           <div className="inv-ornament">{theme.ornament}</div>
           <p className="inv-eyebrow">{inv.eyebrow}</p>

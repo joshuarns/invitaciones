@@ -50,7 +50,7 @@ export default function Gallery() {
             const Scene = SCENES[t.theme.scene]
             return (
             <Link key={t.id} to={`/editar/${t.id}`} className="tpl-card">
-              <div className={`tpl-cover inv${Scene ? ' has-scene' : ''}`} style={themeVars(t.theme)}>
+              <div className={`tpl-cover inv${Scene ? ` has-scene scene-${t.theme.scene}` : ''}`} style={themeVars(t.theme)}>
                 {Scene && <Scene />}
                 <div className="inv-ornament">{t.theme.ornament}</div>
                 <p className="inv-eyebrow">{t.defaults.eyebrow}</p>

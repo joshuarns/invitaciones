@@ -98,7 +98,7 @@ export default function Invitation({ inv }) {
 
   return (
     <article className="inv" style={themeVars(theme)}>
-      <header className={`inv-hero${Scene ? ' has-scene' : ''}`}>
+      <header className={`inv-hero${Scene ? ` has-scene scene-${theme.scene}` : ''}`}>
         {Scene && <Scene interactive />}
         <div className="inv-ornament">{theme.ornament}</div>
         <p className="inv-eyebrow">{inv.eyebrow}</p>
